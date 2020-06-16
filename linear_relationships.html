@@ -1,0 +1,63 @@
+<html>
+<head>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.1/processing.min.js'></script>
+</head>
+<body>
+<canvas id='canvas1'></canvas>
+
+<script>
+
+// y = x + 7
+
+function main(processing) {
+  var SCREEN_WIDTH = 300, SCREEN_HEIGHT = 300;
+  var points = [];
+
+  processing.setup = function() {
+    processing.size(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    for(var i = 0; i < 3; i++)
+      points.push(random_point(SCREEN_WIDTH, SCREEN_HEIGHT));
+  }
+
+  processing.draw = function() {
+    processing.background(0,0,0);
+    // use standard y-axis
+    processing.scale(1, -1);
+    processing.translate(SCREEN_WIDTH / 2, -SCREEN_HEIGHT / 2);
+
+    // axis lines
+    processing.stroke(255, 255, 255);
+    processing.line(0, SCREEN_HEIGHT / 2, 0, -SCREEN_HEIGHT / 2);
+    processing.line(-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, 0);
+
+    // y = x
+    // processing.stroke(255, 0, 0);
+    // processing.line(-SCREEN_WIDTH / 2, -10, SCREEN_WIDTH / 2, -10);
+    // processing.line(-10, -SCREEN_HEIGHT / 2, -10, SCREEN_HEIGHT / 2);
+
+    // processing.stroke(0, 255, 0);
+    // processing.line(-SCREEN_WIDTH / 2, 10, SCREEN_WIDTH / 2, 10);
+    // processing.line(10, -SCREEN_HEIGHT / 2, 10, SCREEN_HEIGHT / 2);
+
+    // y = x - 1
+    processing.stroke(255, 0, 0);
+    processing.line(-SCREEN_WIDTH / 2, -10, SCREEN_WIDTH / 2, -10);
+    processing.line(-10, -SCREEN_HEIGHT / 2, -10, SCREEN_HEIGHT / 2);
+
+    processing.stroke(0, 255, 0);
+    processing.line(-SCREEN_WIDTH / 2, 10, SCREEN_WIDTH / 2, 10);
+    processing.line(10, -SCREEN_HEIGHT / 2, 10, SCREEN_HEIGHT / 2);
+
+  }
+
+  function random_point(bounds_width, bounds_height) {
+    return {x:Math.random() * bounds_width, y:Math.random() * bounds_height};
+  }
+}
+
+var canvas = document.getElementById("canvas1");
+var p = new Processing(canvas, main);
+</script>
+</body>
+</html>
